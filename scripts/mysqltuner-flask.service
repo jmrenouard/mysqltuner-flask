@@ -1,0 +1,15 @@
+[Unit]
+Description=HTTP Python server at http://127.0.0.1:8000
+Documentation=https://docs.python.org/3.7/library/http.server.html
+After=network.target
+
+[Service]
+Type=simple
+User=flask
+Group=flask
+WorkingDirectory=/home/flask/mysqltuner-flask
+ExecStart=bash ./scripts/start_local.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
