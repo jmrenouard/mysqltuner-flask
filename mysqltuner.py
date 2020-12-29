@@ -3,13 +3,14 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
 #, template_folder='./templates')
-#app.debug=True
+app.debug=True
 app.config['SECRET_KEY'] = 'jmr'
-toolbar = DebugToolbarExtension(app)
+if app.debug == True:
+	toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 def hello_world():
-    return render_template('hello.thtml')
+    return render_template('home.html')
     #return 'Hello, World 3!'
 
 @app.route('/bug')
