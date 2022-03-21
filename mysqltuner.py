@@ -1,47 +1,47 @@
 from flask import Flask,render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_wtf import FlaskForm
-from wtforms import StringField,IntegerField
-from wtforms.validators import DataRequired
+from wtforms import StringField,IntegerField,RadioField,SelectField
+from wtforms.validators import DataRequired,IPAddress
 
 class MyForm(FlaskForm):
-    name='configgalera'
-    ramgb=IntegerField('ramgb')
-    nbcpu=IntegerField('nbcpu')
-    sst_user=StringField('sst_user', validators=[DataRequired()])
-    sst_password=StringField('sst_password', validators=[DataRequired()])
-    sst_method=StringField('sst_method', validators=[DataRequired()])
-    clustername = StringField('clustername', validators=[DataRequired()])
-    nbnodes=IntegerField('nbnodes')
-    datadir=StringField('datadir', validators=[DataRequired()])
+    name='configGalera'
+    ramgb=IntegerField( id='ramgb', default=2)
+    nbcpu=IntegerField( id='nbcpu',default=2)
+    datadir=StringField( id='datadir', validators=[DataRequired()], default='/var/lib/mysql')
+    sst_user=StringField( id='sst_user', validators=[DataRequired()], default="sst_user")
+    sst_password=StringField( id='sst_password', validators=[DataRequired()], default="sst_password")
+    sst_method=SelectField( id='sst_method', validators=[DataRequired()], choices=[('mariabackup', 'MariaDB Backup'), ('rsync', 'Rsync'), ('clone', 'Clone'), ('mysqldump', 'MySQL Dump')])
+    clustername = StringField( id='clustername', validators=[DataRequired()], default='MyCluster')
+    nbnodes=RadioField( id='nbnodes', choices=[(3, '3 nodes'), (5, '5 nodes'), (7, '7 nodes')], default=3)
 
-    serverid_1=IntegerField('serverid_1')
-    nodename_1=StringField('nodename_1', validators=[DataRequired()])
-    ipaddress_1=StringField('ipaddress_1', validators=[DataRequired()])
+    serverid_1=IntegerField(id='serverid_1', label="1st server id", default=1)
+    nodename_1=StringField( id='nodename_1', validators=[DataRequired()], default='server1')
+    ipaddress_1=StringField( id='ipaddress_1', validators=[DataRequired()])
     
-    serverid_2=IntegerField('serverid_2')
-    nodename_2=StringField('nodename_2', validators=[DataRequired()])
-    ipaddress_2=StringField('ipaddress_2', validators=[DataRequired()])
+    serverid_2=IntegerField( id='serverid_2', default=2)
+    nodename_2=StringField( id='nodename_2', validators=[DataRequired()], default='server2')
+    ipaddress_2=StringField( id='ipaddress_2', validators=[IPAddress(ipv4=True)])
     
-    serverid_3=IntegerField('serverid_3')
-    nodename_3=StringField('nodename_3', validators=[DataRequired()])
-    ipaddress_3=StringField('ipaddress_3', validators=[DataRequired()])
+    serverid_3=IntegerField( id='id_3', default=3)
+    nodename_3=StringField( id='name_3', validators=[DataRequired()], default='server3')
+    ipaddress_3=StringField( id='address_3', validators=[IPAddress(ipv4=True)])
 
-    serverid_4=IntegerField('serverid_4')
-    nodename_4=StringField('nodename_4', validators=[DataRequired()])
-    ipaddress_4=StringField('ipaddress_4', validators=[DataRequired()])
+    serverid_4=IntegerField( id='id_4', default=4)
+    nodename_4=StringField( id='name_4', validators=[DataRequired()], default='server4')
+    ipaddress_4=StringField( id='address_4', validators=[IPAddress(ipv4=True)])
     
-    serverid_5=IntegerField('serverid_5')
-    nodename_5=StringField('nodename_5', validators=[DataRequired()])
-    ipaddress_5=StringField('ipaddress_5', validators=[DataRequired()])
+    serverid_5=IntegerField( id='id_5', default=5)
+    nodename_5=StringField( id='name_5', validators=[DataRequired()], default='server5')
+    ipaddress_5=StringField( id='address_5', validators=[IPAddress(ipv4=True)])
     
-    serverid_6=IntegerField('serverid_6')
-    nodename_6=StringField('nodename_6', validators=[DataRequired()])
-    ipaddress_6=StringField('ipaddress_6', validators=[DataRequired()])
+    serverid_6=IntegerField( id='id_6', default=6)
+    nodename_6=StringField( id='name_6', validators=[DataRequired()], default='server6')
+    ipaddress_6=StringField( id='address_6', validators=[IPAddress(ipv4=True)])
     
-    serverid_7=IntegerField('serverid_7')
-    nodename_7=StringField('nodename_7', validators=[DataRequired()])
-    ipaddress_7=StringField('ipaddress_7', validators=[DataRequired()])
+    serverid_7=IntegerField( id='id_7', default=7)
+    nodename_7=StringField( id='name_7', validators=[DataRequired()], default='server7')
+    ipaddress_7=StringField( id='address_7', validators=[IPAddress(ipv4=True)])
 
 app = Flask(__name__)
 #, template_folder='./templates')
